@@ -15,10 +15,10 @@ void inventory::tambahdata(vector<inventory> &data){
 
     cout << "Kode Barang  : ";
     getline(cin, kode);
-    cout << "Nama Barang  : ";
-    getline(cin, nama);
     cout << "Kategori     : ";
     getline(cin, kat);
+    cout << "Nama Barang  : ";
+    getline(cin, nama);
     cout << "Stok Masuk   : ";
     cin >> stokMasuk;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -40,7 +40,7 @@ void inventory::tambahdata(vector<inventory> &data){
 
 void inventory::keluarbarang(vector<inventory> &data){
     int itemId, jumlahKeluar;
-
+    inventory::TampilData(data);
     cout << "ID Barang    : ";
     cin >> itemId;
     cout << "Stok Keluar  : ";
@@ -70,22 +70,29 @@ void inventory::TampilData(const vector<inventory> &data){
         cout << "(Tidak ada data inventory)\n";
         return;
     }
+    // For display only: sort a copy by kategori (then by nama, then id)
+    vector<inventory> sorted = data;
+    stable_sort(sorted.begin(), sorted.end(), [](const inventory &a, const inventory &b){
+        if (a.getKategori() != b.getKategori()) return a.getKategori() < b.getKategori();
+        if (a.getNama() != b.getNama()) return a.getNama() < b.getNama();
+        return a.getId() < b.getId();
+    });
 
     cout << left << setw(5) << "NO"
          << setw(5) << "ID"
          << setw(10) << "KODE"
-         << setw(20) << "NAMA"
          << setw(15) << "KATEGORI"
+         << setw(20) << "NAMA"
          << setw(6) << "STOK" << right << "\n";
     cout << string(61, '-') << "\n";
 
     int no = 1;
-    for (const auto &item : data){
+    for (const auto &item : sorted){
         cout << left << setw(5) << no++
              << setw(5) << item.getId()
              << setw(10) << item.getKode()
-             << setw(20) << item.getNama()
              << setw(15) << item.getKategori()
+             << setw(20) << item.getNama()
              << setw(6) << item.getStok() << right << "\n";
     }
 }
@@ -109,10 +116,10 @@ void inventory::UbahData(vector<inventory> &data){
 
     cout << "Kode Barang  : ";
     getline(cin, kode);
-    cout << "Nama Barang  : ";
-    getline(cin, nama);
     cout << "Kategori     : ";
     getline(cin, kat);
+    cout << "Nama Barang  : ";
+    getline(cin, nama);
     cout << "Stok         : ";
     cin >> stok;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -123,6 +130,7 @@ void inventory::UbahData(vector<inventory> &data){
 
 void inventory::HapusData(vector<inventory> &data){
     int id;
+    inventory::TampilData(data);
     cout << "Pilih data ID yang dihapus : ";
     cin >> id;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
