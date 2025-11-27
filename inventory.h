@@ -1,44 +1,53 @@
 // inventory.h
-// Header file untuk class inventory
-// Berisi deklarasi class dan method-method yang digunakan
+// Header file untuk class inventory (TEXT FILE VERSION)
 
 #ifndef INVENTORY_H
 #define INVENTORY_H
 
 #include <fstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
 class inventory {
 private:
     int id;
-    char kodeBarang[50];
-    char namaBarang[50];
-    char kategori[50];
+    string kodeBarang;
+    string namaBarang;
+    string kategori;
     int stok;
 
 public:
-    // === File Operations ===
-    void Cekfile(fstream &data); // Memastikan file inventory.bin ada dan membukanya
-    int ukuranData(fstream &data); // Mengembalikan jumlah record dalam file
-    void MenulisFile(fstream &data, const inventory &item, int posisi); // Menulis record pada posisi tertentu (1-based)
-    inventory BacaData(fstream &data, int posisi); // Membaca record pada posisi tertentu (1-based)
+    // Constructor
+    inventory();
+    inventory(int i, string kode, string nama, string kat, int s);
 
-    // === CRUD Operations ===
-    void tambahdata(fstream &data);  // Menambah stok barang masuk atau barang baru
-    void keluarbarang(fstream &data); // Mengeluarkan barang berdasarkan ID
-    void TampilData(fstream &data); // Menampilkan semua record dalam bentuk tabel
-    void UbahData(fstream &data); // Mengupdate record berdasarkan nomor posisi
-    void HapusData(fstream &data);// Menghapus record berdasarkan index
+    // Getter
+    int getId() const { return id; }
+    string getKode() const { return kodeBarang; }
+    string getNama() const { return namaBarang; }
+    string getKategori() const { return kategori; }
+    int getStok() const { return stok; }
 
-    // === Import/Export Text File ===
-    void LoadDariFile(fstream &data, const string &namaFile); // Load data dari file input.txt
-    void SaveKeFile(fstream &data, const string &namaFile); // Save data ke file output.txt
+    // Setter
+    void setId(int i) { id = i; }
+    void setStok(int s) { stok = s; }
 
-    // === Menu Interface ===
-    int menu(); // Menampilkan menu dan mengembalikan pilihan user
-    void tampil_menu(); // Loop interaktif utama
+    // === File Operations (fileOperations.cpp) ===
+    vector<inventory> LoadSemuaData(const string &namaFile);
+    void SaveSemuaData(const vector<inventory> &data, const string &namaFile);
+
+    // === CRUD Operations (crudOperations.cpp) ===
+    void tambahdata(vector<inventory> &data);
+    void keluarbarang(vector<inventory> &data);
+    void TampilData(const vector<inventory> &data);
+    void UbahData(vector<inventory> &data);
+    void HapusData(vector<inventory> &data);
+
+    // === Menu Interface (menuInterface.cpp) ===
+    int menu();
+    void tampil_menu();
 };
 
 #endif // INVENTORY_H
