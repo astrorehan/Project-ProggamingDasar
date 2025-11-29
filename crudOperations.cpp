@@ -1,6 +1,3 @@
-// crudOperations.cpp
-// Implementasi operasi CRUD dengan vector
-
 #include "inventory.h"
 #include <iostream>
 #include <iomanip>
@@ -70,7 +67,7 @@ void inventory::TampilData(const vector<inventory> &data){
         cout << "(Tidak ada data inventory)\n";
         return;
     }
-    // For display only: sort a copy by kategori (then by nama, then id)
+    // Mengurutkan berdasarkan kategori
     vector<inventory> sorted = data;
     stable_sort(sorted.begin(), sorted.end(), [](const inventory &a, const inventory &b){
         if (a.getKategori() != b.getKategori()) return a.getKategori() < b.getKategori();
