@@ -1,5 +1,4 @@
-// fileOperations.cpp
-// Implementasi operasi file TEXT (inventory.txt)
+// Implementasi operasi file inventory.txt
 
 #include "inventory.h"
 #include <iostream>
@@ -110,7 +109,7 @@ void inventory::ImportDariFile(const string &namaFileEksternal, vector<inventory
         return;
     }
 
-    // Tentukan next ID
+    // Meneentukan next ID
     int nextId = data.empty() ? 1 : data.back().getId() + 1;
     int processed = 0;
 
