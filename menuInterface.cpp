@@ -1,10 +1,8 @@
-// menuInterface.cpp
-// Implementasi user interface dan menu interaktif (TEXT FILE VERSION)
+// Implementasi user interface dan menu interaktif
 
 #include "inventory.h"
 #include <iostream>
 #include <limits>
-
 using namespace std;
 
 int inventory::menu(){
@@ -49,7 +47,7 @@ void inventory::tampil_menu(){
                 break;
             case 2:
                 keluarbarang(data);
-                SaveSemuaData(data, namaFile); // Auto-save
+                SaveSemuaData(data, namaFile);
                 TampilData(data);
                 break;
             case 3:
@@ -58,13 +56,13 @@ void inventory::tampil_menu(){
             case 4:
                 TampilData(data);
                 UbahData(data);
-                SaveSemuaData(data, namaFile); // Auto-save
+                SaveSemuaData(data, namaFile); 
                 TampilData(data);
                 break;
             case 5:
                 TampilData(data);
                 HapusData(data);
-                SaveSemuaData(data, namaFile); // Auto-save
+                SaveSemuaData(data, namaFile); 
                 TampilData(data);
                 break;
             case 6: {
