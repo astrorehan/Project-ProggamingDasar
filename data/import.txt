@@ -1,0 +1,4 @@
+ID|KODE|NAMA|KATEGORI|STOK
+
+40||||
+
