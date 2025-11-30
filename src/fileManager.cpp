@@ -121,6 +121,9 @@ void FileManager::importData(string fileEksternal, vector<Barang>& data) {
     cout << "Import selesai: " << imported << " barang baru ditambahkan, "
          << merged << " barang diperbarui stoknya.\n";
     saveData("data/inventory.txt", data);
+    
+    // Simpan lastId yang sudah update
+    saveLastId(maxId);
 }
 
 int FileManager::loadLastId() {
