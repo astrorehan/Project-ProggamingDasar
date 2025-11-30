@@ -4,12 +4,12 @@
 void FileManager::loadData(string file, vector<Barang>& data) {
     ifstream in(file);
     if (!in) {
-        cerr << "Error: File not found: " << file << "\n";
+        cerr << "Error: File tidak ditemukan: " << file << "\n";
         return;
     }
 
     string line;
-    // Skip header line
+    // Lewati baris header
     getline(in, line);
 
     while (getline(in, line)) {
@@ -19,7 +19,7 @@ void FileManager::loadData(string file, vector<Barang>& data) {
         string idStr, kode, nama, kategori, stokStr;
 
         try {
-            // Parse pipe-separated values
+            // Parse nilai pipe-separated
             getline(ss, idStr, '|');
             getline(ss, kode, '|');
             getline(ss, nama, '|');
@@ -30,7 +30,7 @@ void FileManager::loadData(string file, vector<Barang>& data) {
             int stok = stoi(stokStr);
             data.push_back(Barang(id, kode, nama, kategori, stok));
         } catch (const exception& e) {
-            cerr << "Warning: Skipping malformed line: " << line << " (" << e.what() << ")\n";
+            cerr << "Warning: Baris tidak valid dilewati: " << line << " (" << e.what() << ")\n";
         }
     }
     in.close();
@@ -39,14 +39,14 @@ void FileManager::loadData(string file, vector<Barang>& data) {
 void FileManager::saveData(string file, vector<Barang>& data) {
     ofstream out(file);
     if (!out) {
-        cerr << "Error: Cannot write to file: " << file << "\n";
+        cerr << "Error: Tidak bisa menulis ke file: " << file << "\n";
         return;
     }
 
-    // Write header
+    // Tulis header
     out << "ID|KODE|NAMA|KATEGORI|STOK\n";
 
-    // Write data in pipe-separated format
+    // Tulis data dalam format pipe-separated
     for (auto& b : data) {
         out << b.getId() << "|"
             << b.getKode() << "|"
@@ -60,18 +60,18 @@ void FileManager::saveData(string file, vector<Barang>& data) {
 void FileManager::importData(string fileEksternal, vector<Barang>& data) {
     ifstream in(fileEksternal);
     if (!in) {
-        cerr << "Error: File not found: " << fileEksternal << "\n";
+        cerr << "Error: File tidak ditemukan: " << fileEksternal << "\n";
         return;
     }
 
     string line;
-    // Skip header line
+    // Lewati baris header
     getline(in, line);
 
     int imported = 0, merged = 0;
     int maxId = 0;
     
-    // Find max ID from existing data
+    // Cari ID maksimal dari data yang ada
     for (const auto& b : data) {
         if (b.getId() > maxId) {
             maxId = b.getId();
@@ -85,7 +85,7 @@ void FileManager::importData(string fileEksternal, vector<Barang>& data) {
         string idStr, kode, nama, kategori, stokStr;
 
         try {
-            // Parse pipe-separated values
+            // Parse nilai pipe-separated
             getline(ss, idStr, '|');
             getline(ss, kode, '|');
             getline(ss, nama, '|');
@@ -94,11 +94,11 @@ void FileManager::importData(string fileEksternal, vector<Barang>& data) {
 
             int stok = stoi(stokStr);
             
-            // Check if kode already exists
+            // Cek apakah kode sudah ada
             bool found = false;
             for (auto& b : data) {
                 if (b.getKode() == kode) {
-                    // Merge: add stock to existing item
+                    // Merge: tambahkan stok ke item yang ada
                     b.setStok(b.getStok() + stok);
                     merged++;
                     found = true;
@@ -107,13 +107,13 @@ void FileManager::importData(string fileEksternal, vector<Barang>& data) {
             }
 
             if (!found) {
-                // New item: assign new ID and add
+                // Item baru: assign ID baru dan tambahkan
                 int newId = ++maxId;
                 data.push_back(Barang(newId, kode, nama, kategori, stok));
                 imported++;
             }
         } catch (const exception& e) {
-            cerr << "Warning: Skipping malformed line: " << line << " (" << e.what() << ")\n";
+            cerr << "Warning: Baris tidak valid dilewati: " << line << " (" << e.what() << ")\n";
         }
     }
     in.close();
@@ -126,7 +126,7 @@ void FileManager::importData(string fileEksternal, vector<Barang>& data) {
 int FileManager::loadLastId() {
     ifstream in("data/lastId.txt");
     if (!in) {
-        return 0;  // Default if file doesn't exist
+        return 0;  // Default jika file tidak ada
     }
     
     int lastId = 0;
@@ -138,7 +138,7 @@ int FileManager::loadLastId() {
 void FileManager::saveLastId(int lastId) {
     ofstream out("data/lastId.txt");
     if (!out) {
-        cerr << "Error: Cannot write to file: data/lastId.txt\n";
+        cerr << "Error: Tidak bisa menulis ke file: data/lastId.txt\n";
         return;
     }
     

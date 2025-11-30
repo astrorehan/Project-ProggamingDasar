@@ -33,7 +33,7 @@ void InventoryManager::tambahBarang() {
     cout << "Stok  : "; cin >> stok;
     cin.ignore();
 
-    // Check if kode already exists
+    // Cek apakah kode sudah ada
     for (auto& b : data) {
         if (b.getKode() == kode) {
             b.setStok(b.getStok() + stok);
