@@ -1,12 +1,11 @@
 ID|KODE|NAMA|KATEGORI|STOK
-1|A101|Mouse|Elektronik|50
-2|B202|Keyboard|Elektronik|80
-3|C303|Buku Tulis|ATK|240
+1|A101|Mouse|Elektronik|75
+2|B202|Keyboard|Elektronik|120
+3|C303|Buku Tulis|ATK|230
 5|E505|Susu Kotak|Minuman|150
 6|F606|Kopi Sachet|Minuman|360
 7|G707|Kaos Polos|Pakaian|120
 8|H808|Celana Jeans|Pakaian|70
-9|I909|Obeng Set|Perkakas|80
 10|J010|Palu Besi|Perkakas|60
 11|K111|Masker Medis|Kesehatan|600
 12|L212|Hand Sanitizer|Kesehatan|300
@@ -16,3 +15,4 @@ ID|KODE|NAMA|KATEGORI|STOK
 16|P616|Flashdisk 32GB|Elektronik|140
 17|Q717|Minyak Goreng|Sembako|2
 19|D523|Alas Mouse|Elektronik|1
+21|G523|Coca Cola|Minuman Bersoda|50

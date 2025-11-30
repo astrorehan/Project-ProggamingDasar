@@ -1,4 +1,4 @@
 ID|KODE|NAMA|KATEGORI|STOK
-
-40||||
+1|A101|Mouse|Elektronik|25
+2|B202|Keyboard|Elektronik|40
 
